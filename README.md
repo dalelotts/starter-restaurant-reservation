@@ -40,6 +40,9 @@ If you have trouble getting the server to run, reach out for assistance.
 The tests exist for each of these user stories. The tests are organized by user story so that you know exactly which tests
 you need to make pass for the user story you are currently implementing. 
 
+There are no user stories for deployment. You are encouraged to deploy early and often. You may even decide to deploy
+before adding any features.  Since this is a monorepo, you can follow the instructions in [this vercel article on monorepos](https://vercel.com/blog/monorepos) to deploy this project.
+
 ### US-1 Create and list reservations
 
 As a restaurant manager
