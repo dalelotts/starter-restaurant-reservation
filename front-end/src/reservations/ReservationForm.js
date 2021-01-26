@@ -4,9 +4,9 @@ function ReservationForm({
   onSubmit,
   onCancel,
   initialState = {
-    firstName: "",
-    lastName: "",
-    mobileNumber: "",
+    first_name: "",
+    last_name: "",
+    mobile_number: "",
     reservation_date: "",
     reservation_time: "",
     people: "",
@@ -40,39 +40,39 @@ function ReservationForm({
         <fieldset>
           <div className="row">
             <div className="form-group col">
-              <label htmlFor="firstName">First Name</label>
+              <label htmlFor="first_name">First Name</label>
               <input
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="first_name"
+                name="first_name"
                 className="form-control"
-                value={reservation.firstName}
+                value={reservation.first_name}
                 required={true}
                 placeholder="First Name"
                 onChange={changeHandler}
               />
             </div>
             <div className="form-group col">
-              <label htmlFor="lastName">Last Name</label>
+              <label htmlFor="last_name">Last Name</label>
               <input
                 type="text"
-                id="lastName"
-                name="lastName"
+                id="last_name"
+                name="last_name"
                 className="form-control"
-                value={reservation.lastName}
+                value={reservation.last_name}
                 required={true}
                 placeholder="Last Name"
                 onChange={changeHandler}
               />
             </div>
             <div className="form-group col">
-              <label htmlFor="date">Mobile Number</label>
+              <label htmlFor="mobile_number">Mobile Number</label>
               <input
                 type="text"
-                id="mobileNumber"
-                name="mobileNumber"
+                id="mobile_number"
+                name="mobile_number"
                 className="form-control"
-                value={reservation.mobileNumber}
+                value={reservation.mobile_number}
                 required={true}
                 placeholder="Mobile Number"
                 onChange={changeHandler}

@@ -1,7 +1,7 @@
 const request = require("supertest");
 
-const knex = require("../src/db/connection");
 const app = require("../src/app");
+const knex = require("../src/db/connection");
 
 describe("Create and list reservations", () => {
   beforeEach(() => {
@@ -38,10 +38,10 @@ describe("Create and list reservations", () => {
       expect(response.status).toBe(400);
     });
 
-    test("returns 400 if firstName is missing", async () => {
+    test("returns 400 if first_name is missing", async () => {
       const data = {
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         reservation_time: "13:30",
         people: 1,
@@ -52,33 +52,15 @@ describe("Create and list reservations", () => {
         .set("Accept", "application/json")
         .send({ data });
 
-      expect(response.body.error).toContain("firstName");
+      expect(response.body.error).toContain("first_name");
       expect(response.status).toBe(400);
     });
 
-    test("returns 400 if firstName is empty", async () => {
+    test("returns 400 if first_name is empty", async () => {
       const data = {
-        firstName: "",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
-        reservation_date: "2025-01-01",
-        reservation_time: "13:30",
-        people: 1
-      };
-
-      const response = await request(app)
-        .post("/reservations")
-        .set("Accept", "application/json")
-        .send({ data });
-
-      expect(response.body.error).toContain("firstName");
-      expect(response.status).toBe(400);
-    });
-
-    test("returns 400 if lastName is missing", async () => {
-      const data = {
-        firstName: "first",
-        mobileNumber: "800-555-1212",
+        first_name: "",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         reservation_time: "13:30",
         people: 1,
@@ -89,18 +71,17 @@ describe("Create and list reservations", () => {
         .set("Accept", "application/json")
         .send({ data });
 
-      expect(response.body.error).toContain("lastName");
+      expect(response.body.error).toContain("first_name");
       expect(response.status).toBe(400);
     });
 
-    test("returns 400 if lastName is empty", async () => {
+    test("returns 400 if last_name is missing", async () => {
       const data = {
-        firstName: "first",
-        lastName: "",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         reservation_time: "13:30",
-        people: 1
+        people: 1,
       };
 
       const response = await request(app)
@@ -108,14 +89,33 @@ describe("Create and list reservations", () => {
         .set("Accept", "application/json")
         .send({ data });
 
-      expect(response.body.error).toContain("lastName");
+      expect(response.body.error).toContain("last_name");
+      expect(response.status).toBe(400);
+    });
+
+    test("returns 400 if last_name is empty", async () => {
+      const data = {
+        first_name: "first",
+        last_name: "",
+        mobile_number: "800-555-1212",
+        reservation_date: "2025-01-01",
+        reservation_time: "13:30",
+        people: 1,
+      };
+
+      const response = await request(app)
+        .post("/reservations")
+        .set("Accept", "application/json")
+        .send({ data });
+
+      expect(response.body.error).toContain("last_name");
       expect(response.status).toBe(400);
     });
 
     test("returns 400 if mobilePhone is missing", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
+        first_name: "first",
+        last_name: "last",
         reservation_date: "2025-01-01",
         reservation_time: "13:30",
         people: 1,
@@ -126,18 +126,18 @@ describe("Create and list reservations", () => {
         .set("Accept", "application/json")
         .send({ data });
 
-      expect(response.body.error).toContain("mobileNumber");
+      expect(response.body.error).toContain("mobile_number");
       expect(response.status).toBe(400);
     });
 
     test("returns 400 if mobilePhone is empty", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "",
         reservation_date: "2025-01-01",
         reservation_time: "13:30",
-        people: 1
+        people: 1,
       };
 
       const response = await request(app)
@@ -145,15 +145,15 @@ describe("Create and list reservations", () => {
         .set("Accept", "application/json")
         .send({ data });
 
-      expect(response.body.error).toContain("mobileNumber");
+      expect(response.body.error).toContain("mobile_number");
       expect(response.status).toBe(400);
     });
 
     test("returns 400 if reservation_date is missing", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_time: "13:30",
         people: 1,
       };
@@ -169,9 +169,9 @@ describe("Create and list reservations", () => {
 
     test("returns 400 if reservation_date is empty", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "",
         reservation_time: "13:30",
         people: 1,
@@ -187,12 +187,12 @@ describe("Create and list reservations", () => {
     });
     test("returns 400 if reservation_date is not a date", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "not-a-date",
         reservation_time: "13:30",
-        people: 1
+        people: 1,
       };
 
       const response = await request(app)
@@ -206,9 +206,9 @@ describe("Create and list reservations", () => {
 
     test("returns 400 if reservation_time is missing", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         people: 1,
       };
@@ -223,9 +223,9 @@ describe("Create and list reservations", () => {
     });
     test("returns 400 if reservation_time is empty", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         reservation_time: "",
         people: 1,
@@ -241,9 +241,9 @@ describe("Create and list reservations", () => {
     });
     test("returns 400 if reservation_time is not a time", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         reservation_time: "not-a-time",
         people: 1,
@@ -260,9 +260,9 @@ describe("Create and list reservations", () => {
 
     test("returns 400 if people is missing", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         reservation_time: "17:30",
       };
@@ -277,9 +277,9 @@ describe("Create and list reservations", () => {
     });
     test("returns 400 if people is zero", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         reservation_time: "17:30",
         people: 0,
@@ -295,9 +295,9 @@ describe("Create and list reservations", () => {
     });
     test("returns 400 if people is not a number", async () => {
       const data = {
-        firstName: "first",
-        lastName: "last",
-        mobileNumber: "800-555-1212",
+        first_name: "first",
+        last_name: "last",
+        mobile_number: "800-555-1212",
         reservation_date: "2025-01-01",
         reservation_time: "17:30",
         people: "2",
@@ -313,23 +313,25 @@ describe("Create and list reservations", () => {
     });
   });
 
-  describe.only("GET /reservations", () => {
-    test("returns all reservations by default", async () => {
+  describe("GET /reservations", () => {
+    test("returns only reservations matching date query parameter", async () => {
       const response = await request(app)
-        .get("/reservations")
+        .get("/reservations?date=2020-12-31")
         .set("Accept", "application/json");
 
-      expect(response.body.data).toHaveLength(2);
+      expect(response.body.data).toHaveLength(1);
+      expect(response.body.data[0].first_name).toBe("Rick");
       expect(response.status).toBe(200);
     });
-    test("returns only reservations matching date query parameter", async () => {
+    test("returns reservations sorted by time (earliest time first)", async () => {
       const response = await request(app)
         .get("/reservations?date=2020-12-30")
         .set("Accept", "application/json");
 
-      expect(response.body.data).toHaveLength(1);
-      expect(response.body.data[0].firstName).toBe("Frank");
+      expect(response.body.data).toHaveLength(2);
+      expect(response.body.data[0].first_name).toBe("Bird");
+      expect(response.body.data[1].first_name).toBe("Frank");
       expect(response.status).toBe(200);
     });
-  })
+  });
 });

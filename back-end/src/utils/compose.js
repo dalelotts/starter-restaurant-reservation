@@ -11,11 +11,14 @@
 
 const traceFunction = require("../logging/traceFunction");
 
-function compose (...delegates) {
-  const tracedDelegates = delegates.map(delegate => traceFunction(delegate))
-  return (argument) => {
-    return tracedDelegates.reduceRight((accumulator, delegate) => delegate(accumulator), argument);
-  }
+function compose(...delegates) {
+  const tracedDelegates = delegates.map((delegate) => traceFunction(delegate));
+  return (argument, logger) => {
+    return tracedDelegates.reduceRight(
+      (accumulator, delegate) => delegate(accumulator, logger),
+      argument
+    );
+  };
 }
 
 module.exports = compose;

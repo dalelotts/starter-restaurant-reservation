@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 import { createReservation } from "../utils/api";
 import ReservationForm from "./ReservationForm";
-import {formatAsDate} from "../utils/dates";
+import { formatAsDate } from "../utils/dates";
 
 function DishCreate() {
   const history = useHistory();
@@ -12,11 +12,13 @@ function DishCreate() {
 
   function submitHandler(dish) {
     const abortController = new AbortController();
-    setError(null)
+    setError(null);
     createReservation(dish, abortController.signal)
       .then((savedReservation) => {
-        console.log("savedReservation", savedReservation)
-        history.push(`/dashboard?date=${formatAsDate(savedReservation.reservation_date)}`)
+        console.log("savedReservation", savedReservation);
+        history.push(
+          `/dashboard?date=${formatAsDate(savedReservation.reservation_date)}`
+        );
       })
       .catch(setError);
     return () => abortController.abort();

@@ -45,7 +45,7 @@ async function fetchJson(url, options, onCancel) {
       console.error(error.stack);
       throw error;
     }
-    return Promise.resolve(onCancel)
+    return Promise.resolve(onCancel);
   }
 }
 
@@ -54,11 +54,11 @@ async function fetchJson(url, options, onCancel) {
  * @returns {Promise<[reservation]>}
  *  a promise that resolves to a possibly empty array of reservation saved in the database.
  */
-export async function listReservations(date , signal) {
+export async function listReservations(date, signal) {
   const url = `${API_BASE_URL}/reservations?date=${date}`;
   return await fetchJson(url, { signal }, [])
     .then(formatReservationDate)
-    .then(formatReservationTime)
+    .then(formatReservationTime);
 }
 
 /**

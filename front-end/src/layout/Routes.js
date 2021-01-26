@@ -5,8 +5,7 @@ import ReservationCreate from "../reservations/ReservationCreate";
 import Dashboard from "../dashboard/Dashboard";
 import NotFound from "./NotFound";
 import useQuery from "../utils/useQuery";
-import {today} from "../utils/dates";
-
+import { today } from "../utils/dates";
 
 function Routes() {
   const query = useQuery();
