@@ -21,7 +21,7 @@ This starter code closely follows the best practices and patterns established in
 
 ## Database setup
 
-1. Set up three new ElephantSQL database instance - development, test, and production - by following the instructions in the "PostgreSQL: Creating & Deleting Databases" checkpoint.
+1. Set up four new ElephantSQL database instance - development, test, preview, and production - by following the instructions in the "PostgreSQL: Creating & Deleting Databases" checkpoint.
 1. After setting up your database instances, connect DBeaver to your new database instances by following the instructions in the "PostgreSQL: Installing DBeaver" checkpoint.
 
 ## Installation

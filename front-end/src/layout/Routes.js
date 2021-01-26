@@ -12,6 +12,9 @@ function Routes() {
 
   return (
     <Switch>
+      <Route exact={true} path="/">
+        <Redirect to={"/dashboard"} />
+      </Route>
       <Route exact={true} path="/reservations">
         <Redirect to={"/dashboard"} />
       </Route>

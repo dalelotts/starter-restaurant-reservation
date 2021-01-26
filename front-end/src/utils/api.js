@@ -5,7 +5,7 @@
 import formatReservationDate from "./formatReservationDate";
 import formatReservationTime from "./formatReservationTime";
 
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
 
 /**
  * Defines the default headers for these functions to work with `json-server`
@@ -22,6 +22,8 @@ headers.append("Content-Type", "application/json");
  *  the url for the requst.
  * @param options
  *  any options for fetch
+ * @param onCancel
+ *  value to return if fetch call is aborted. Default value is undefined.
  * @returns {Promise<Error|any>}
  *  a promise that resolves to the `json` data or an error.
  *  If the response is not in the 200 - 399 range the promise is rejected.

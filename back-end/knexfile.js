@@ -6,8 +6,6 @@ const {
   DATABASE_URL_TEST = "postgresql://postgres@localhost/postgres",
 } = process.env;
 
-
-
 module.exports = {
   development: {
     client: "postgresql",
